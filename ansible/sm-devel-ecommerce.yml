@@ -1,0 +1,40 @@
+#- hosts: all
+#  become: yes
+#  become_method: sudo
+#  tasks:
+#    - name: installing repo for Java 8 in Ubuntu
+#      apt_repository: repo='ppa:openjdk-r/ppa'
+
+- hosts: all
+  become: yes
+  become_method: sudo
+  roles:
+    - nginx
+    - { role: php-fpm, php_fpm_55: false, php_fpm_56: false, php_fpm_70: true, php_fpm_71: true }
+    - git
+    - composer
+    - adminer   # klient MySql
+    - phpinfo
+    - phpunit
+    - visualphpunit
+
+    # instalace nodejs a yarn
+    - geerlingguy.nodejs
+
+    - uniman    # klient MySql, Redis, RabitMQ
+    - graphviz  # graf composer zavislosti
+    - redis
+    - sami      # generovani dokumentace
+    - yarn      # instalace yarnu misto boweru
+    - gulp
+#    - AbdoulNdiaye.Blackfire
+
+    # pokus o instalaci elasic searche z Ansible Galaxy - funkcni!!!
+#    - role: geerlingguy.java
+#      when: "ansible_os_family == 'Ubuntu'"
+#      java_packages:
+#        - openjdk-8-jdk
+#    - geerlingguy.elasticsearch
+
+    # instalace doplnku primo pro aplikaci
+    - sportisimo-stockadmin

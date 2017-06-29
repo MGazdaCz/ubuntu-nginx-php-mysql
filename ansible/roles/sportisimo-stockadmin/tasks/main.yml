@@ -1,0 +1,97 @@
+# HOTFIX neexistence www adresare
+#- name: create directory for application
+#  file:
+#    path: /var/www/html/www
+#    state: directory
+#    group: www-data
+#    owner: www-data
+#    mode: 0775
+
+- name: install mc
+  apt:
+    name: mc
+
+- name: repair privileges in /var/www/html
+  file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: vagrant
+    recurse: yes
+    mode: 0775
+
+#- name: add update.sh to rc.d
+#  command: update-rc.d /etc/init.d/update.sh defaults
+
+# inicializace virtualhostu pro projekt
+- include: init-virtualhosts.yml
+
+# kopirovani parametru pro cgi skripty
+- name: copy fastcgi_params
+  template:
+    src: fastcgi_params
+    dest: /etc/nginx/fastcgi_params
+    mode: 0644
+  notify: restart nginx
+
+# instalace openssl 1.0.2g
+#- name: install make
+#  apt:
+#    name: make
+#
+#- name: download openssl-1.0.2g.tar.gz
+#  get_url:
+#    url: https://www.openssl.org/source/openssl-1.0.2g.tar.gz
+#    dest: /home/vagrant/openssl-1.0.2g.tar.gz
+#    mode: 0666
+#    owner: vagrant
+#    group: vagrant
+#
+#- name: unarchive openssl-1.0.2g.tar.gz
+#  unarchive:
+#    src: /home/vagrant/openssl-1.0.2g.tar.gz
+#    dest: /home/vagrant
+#
+#- name: change priv for openssl-1.0.2g
+#  file:
+#    path: /home/vagrant/openssl-1.0.2g
+#    owner: vagrant
+#    group: vagrant
+#    mode: 0777
+#    recurse: true
+#
+#- name: run config for openssl-1.0.2g
+#  command: /home/vagrant/openssl-1.0.2g/config
+#  become: yes
+#
+#- name: run make install for openssl-1.0.2g
+#  command: make install
+#  args:
+#    chdir: /home/vagrant/openssl-1.0.2g
+#  become: yes
+#
+#- name: make symlink
+#  command: ln -sf /usr/local/ssl/bin/openssl `which openssl`
+#  become: yes
+
+
+# odstraneni SSL
+#- name: make dir for keys
+#  file:
+#    path: /etc/nginx/ssl/*
+#    state: absent
+
+# zavedeni SSL a HTML 2
+- name: make dir for keys
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+
+# generovani SSL certifikatu
+- name: create self-signed SSL cert
+  #command: openssl req -new -nodes -x509 -subj "/C=CZ/ST=Czech/L=Prague/O=Sportisimo/CN=devel" -days 3650 -keyout /etc/nginx/ssl/devel-7.1.key -out /etc/nginx/ssl/devel-7.1.crt -extensions v3_ca creates=/etc/nginx/ssl/devel-7.1-v3.crt
+  command: openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -subj "/C=CZ/ST=Czech/L=Prague/O=Sportisimo/CN=devel" -keyout /etc/nginx/ssl/devel-7.1.key -out /etc/nginx/ssl/devel-7.1.crt
+  notify: restart nginx

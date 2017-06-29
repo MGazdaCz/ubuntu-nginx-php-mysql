@@ -1,0 +1,15 @@
+ansible_user: vagrant
+ansible_ssh_pass: vagrant
+
+stockadmin_devel_path: /vagrant
+stockadmin_master_path: /var/www/html
+
+# konfigurace BlackFire
+blackfire_server_id:    49098f41-bbd0-48c0-892b-3da891e0f61b
+blackfire_server_token: 6f8b13b814959e54e1f7e16a16d2bf4f13df7c01211b1d892ef5b81f94f32521
+
+blackfire_client_id:    f55ac774-4ad4-4783-9521-a5c30f061269
+blackfire_server_token: 4bc33943b6bff27d77e2377cce2465e6dbf3f3ad664b72a876b3e6f4cbabf42f
+
+# konfigurace node js
+nodejs_version: "6.x"

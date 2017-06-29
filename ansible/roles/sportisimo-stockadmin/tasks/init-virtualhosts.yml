@@ -1,0 +1,27 @@
+# inicializace virtualhostu
+- name: copy devel.conf
+  template:
+    src: devel.conf
+    dest: /etc/nginx/sites-enabled/devel.conf
+    mode: 0644
+  notify:
+    - restart nginx
+  tags: init-virtualhosts
+
+- name: copy devel-7.0.conf
+  template:
+    src: devel-7.0.conf
+    dest: /etc/nginx/sites-enabled/devel-7.0.conf
+    mode: 0644
+  notify:
+    - restart nginx
+  tags: init-virtualhosts
+
+- name: copy master.conf
+  template:
+    src: master.conf
+    dest: /etc/nginx/sites-enabled/master.conf
+    mode: 0644
+  notify:
+    - restart nginx
+  tags: init-virtualhosts
