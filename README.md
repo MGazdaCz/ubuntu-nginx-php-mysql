@@ -11,7 +11,8 @@ Konfigurace virtualního serveru pro vývoj webových aplikací pomocí Vagrantu
 - Adminer
 
 ## Konfigurační parametry
-´´´
+
+```
 nginx_vhosts:
   - listen: "80"
     server_name: "devel-server.com"
@@ -80,4 +81,4 @@ mysql_users:
 
 adminer_install_dir: /var/www/adminer
 adminer_install_filename: index.php
-´´´
+```
