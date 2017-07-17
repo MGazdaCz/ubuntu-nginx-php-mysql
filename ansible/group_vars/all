@@ -17,6 +17,20 @@ nginx_vhosts:
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
       }
+  - listen: "80"
+    server_name: "adminer.devel-server.com"
+    root: "/var/www/adminer"
+    index: "index.php"
+    state: "present"
+    template: "{{ nginx_vhost_template }}"
+    extra_parameters: |
+      location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+      }
 
 php_enable_php_fpm: true
 
@@ -51,3 +65,6 @@ mysql_users:
     host: "%"
     password: test
     priv: "example_db.*:ALL"
+
+adminer_install_dir: /var/www/adminer
+adminer_install_filename: index.php

@@ -3,3 +3,4 @@
 - src: geerlingguy.php
 - src: geerlingguy.mysql
 - src: geerlingguy.composer
+- src: geerlingguy.adminer

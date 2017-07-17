@@ -19,3 +19,4 @@
     - { role: geerlingguy.php }
     - { role: geerlingguy.mysql }
     - geerlingguy.composer
+    - { role: geerlingguy.adminer }
