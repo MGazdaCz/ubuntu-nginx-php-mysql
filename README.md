@@ -1,4 +1,4 @@
-# Ubuntu, Nginx, PHP, MySql
+# Ubuntu, Nginx, PHP, MySQL
 Konfigurace virtualního serveru pro vývoj webových aplikací pomocí Vagrantu a Ansible
 
 ## Instalované balíčky
