@@ -81,4 +81,10 @@ mysql_users:
 
 adminer_install_dir: /var/www/adminer
 adminer_install_filename: index.php
-```
+``` 
+
+## Nastavení v hosts
+``` 
+192.168.44.10   www.devel-server.com
+192.168.44.10   devel-server.com
+``` 
