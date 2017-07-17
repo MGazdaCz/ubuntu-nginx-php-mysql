@@ -1,0 +1,21 @@
+#- hosts: all
+#  become: yes
+#  become_method: sudo
+#  tasks:
+#    - name: installing repo for Java 8 in Ubuntu
+#      apt_repository: repo='ppa:openjdk-r/ppa'
+
+- hosts: all
+  become: yes
+  become_method: sudo
+  pre_tasks:
+    - apt_repository:
+        repo: 'ppa:ondrej/php'
+        state: present
+
+  roles:
+    - { role: geerlingguy.git }
+    - { role: geerlingguy.nginx }
+    - { role: geerlingguy.php }
+    - { role: geerlingguy.mysql }
+    - geerlingguy.composer

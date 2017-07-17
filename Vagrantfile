@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   # nastaveni site
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.44.10"
 
   #config.vm.network "public_network", auto_config: false
   #config.vm.provision "shell",wget
@@ -48,14 +48,14 @@ Vagrant.configure("2") do |config|
   # Spusteni skriptu pred Ansiblem
   config.vm.provision "shell", inline: <<-SHELL
     # instalace pozadovanych aplikaci pro ansible
-    apt-get install git zip unzip jq -y
+    apt-get install zip unzip jq -y
   SHELL
 
   # Aktualizace nastaveni serveru pomoci Ansible playbooku
   config.vm.provision "ansible_local" do |ansible|
     ansible.galaxy_role_file = "./ansible/requirements.yml"
     ansible.galaxy_roles_path = "./temp/ansible/"
-    ansible.playbook = "./ansible/sm-devel-ecommerce.yml"
+    ansible.playbook = "./ansible/playbook.yml"
   end
 
 end
