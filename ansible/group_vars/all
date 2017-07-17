@@ -53,6 +53,7 @@ php_packages:
   - php7.1-mbstring
   - php7.1-pdo
   - php7.1-xml
+  - php7.1-mysql
 php_fpm_daemon : php7.1-fpm
 
 mysql_root_password: root
