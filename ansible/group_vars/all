@@ -1,6 +1,3 @@
-ansible_user: vagrant
-ansible_ssh_pass: vagrant
-
 nginx_vhosts:
   - listen: "80"
     server_name: "devel-server.com"
